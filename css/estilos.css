@@ -175,3 +175,63 @@
     text-align: justify;
     padding: 10px;
 }
+
+@media (max-width: 576px) {
+    .titulo-admin {
+        display: none;
+    }
+
+    .logo-imagen {
+        display: none;
+    }
+
+    .panel {        
+        justify-content: center;
+    }
+
+    .menu-opciones {
+        position: static;
+        width: auto;
+        height: auto;
+    }
+
+    .panel-derecho {
+        position: static;
+        align-items: center;
+        align-content: center;
+        justify-content: center;
+        width: 300px;
+        height: auto;
+    }
+
+    .titulo {
+        font-size: 2rem;
+    }
+
+    .btn-opti {
+        border-radius: 15px;
+        margin: 10px 5px;
+        padding: 10px;
+        width: 315px;
+        background: linear-gradient(90deg, #F7EDE4, #FFE6C1);
+        font-family: 'Quicksand', sans-serif;
+        color: #195E95;
+        font-size: 0.9rem;
+    }
+    
+}
+
+@media (min-width: 768px) and (max-width: 992px) {
+    .logo-imagen {        
+        left: auto;
+    }
+
+    .menu-opciones {
+        width: 14em;
+    }
+
+    .btn-opti {
+        width: 250px;
+        font-size: 0.8rem;
+    }
+}

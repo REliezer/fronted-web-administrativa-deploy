@@ -150,33 +150,42 @@ if (toastTrigger) {
 const generarCategorias = async () => {
     for (let i = 0; i < categorias.length; i++) {
         document.getElementById('lista-categoria').innerHTML +=
-            `<option value="${i}">${categorias[i].nombreCategoria}</option>`;
+            `<option value="${categorias[i].idCategoria}">${categorias[i].nombreCategoria}</option>`;
 
         document.getElementById('categoriaEmpresa').innerHTML +=
-            `<option value="${i}">${categorias[i].nombreCategoria}</option>`;
+            `<option value="${categorias[i].idCategoria}">${categorias[i].nombreCategoria}</option>`;
     }
 }
 
 const generarAdminEmpresas = async () => {
     indiceCategoriaSeleccionada = document.getElementById('lista-categoria').value;
     console.log("Cargar empresas de la categoria: ", indiceCategoriaSeleccionada);
-    document.getElementById('mostrarOpciones').innerHTML = '';
 
-    for (let i = 0; i < empresasCategorias[indiceCategoriaSeleccionada].empresas.length; i++) {
-        document.getElementById('mostrarOpciones').innerHTML +=
-            `<div class="col-6">
-                <div class="card" style="height: 13rem;">
-                    <img src="./${empresasCategorias[indiceCategoriaSeleccionada].empresas[i].logoEmpresa}" class="card-img-top">
-                    <div style="position: absolute; right: 15px;">
-                        <i class="fa-solid fa-trash fa-xs icono-accion" style="color: #A0333C;" onclick="eliminarEmpresa('${empresasCategorias[indiceCategoriaSeleccionada]._id}', '${empresasCategorias[indiceCategoriaSeleccionada].empresas[i].idEmpresa}');"></i>
-                        <i class="fa-solid fa-pen-to-square fa-xs icono-accion" style="color: #195E95;" onclick="editarEmpresa('${empresasCategorias[indiceCategoriaSeleccionada]._id}', '${empresasCategorias[indiceCategoriaSeleccionada].empresas[i].idEmpresa}');"></i>
+    document.getElementById('mostrarOpciones').innerHTML = '';
+    console.log("empresasCategorias.length: ", empresasCategorias.length);
+    for (let o = 0; o < empresasCategorias.length; o++) {
+        if (empresasCategorias[o].idCategoria == indiceCategoriaSeleccionada) {
+            console.log("empresasCategorias[o].idCategoria: ", empresasCategorias[o].idCategoria)
+            for (let i = 0; i < empresasCategorias[o].empresas.length; i++) {
+                console.log("Cargar empresas de la categoria: ", empresasCategorias[o].empresas);
+                document.getElementById('mostrarOpciones').innerHTML +=
+                    `<div class="col-6">
+                    <div class="card" style="height: 15rem;">
+                        <img src="./${empresasCategorias[o].empresas[i].logoEmpresa}" class="card-img-top">
+                        <div style="position: absolute; right: 15px;">
+                            <i class="fa-solid fa-trash fa-xs icono-accion" style="color: #A0333C;" onclick="eliminarEmpresa('${empresasCategorias[o]._id}', '${empresasCategorias[o].empresas[i].idEmpresa}');"></i>
+                            <i class="fa-solid fa-pen-to-square fa-xs icono-accion" style="color: #195E95;" onclick="editarEmpresa('${empresasCategorias[o]._id}', '${empresasCategorias[o].empresas[i].idEmpresa}');"></i>
+                        </div>
+                        <div class="card-body">
+                            <h6 class="">${empresasCategorias[o].empresas[i].nombreEmpresa}</h6>
+                            <p class="texto-general">${empresasCategorias[o].empresas[i].direccionEmpresa}</p>                        
+                        </div>
                     </div>
-                    <div class="card-body">
-                        <h6 class="">${empresasCategorias[indiceCategoriaSeleccionada].empresas[i].nombreEmpresa}</h6>
-                        <p class="texto-general">${empresasCategorias[indiceCategoriaSeleccionada].empresas[i].direccionEmpresa}</p>                        
-                    </div>
-                </div>
-            </div>`;
+                </div>`;
+            }
+            break;
+        }
+
     }
 }
 
@@ -220,7 +229,7 @@ const editarEmpresa = async (idCategoria, idEmpresa) => {
     console.log(empresaProducto);
 
     for (let i = 0; i < empresaProducto[0].empresas.length; i++) {
-        if (empresaProducto[0].empresas[i].idEmpresa === idEmpresa) {            
+        if (empresaProducto[0].empresas[i].idEmpresa === idEmpresa) {
             document.getElementById('nombreEmpresa').value = empresaProducto[0].empresas[i].nombreEmpresa;
             document.getElementById('logoEmpresa').src = empresaProducto[0].empresas[i].logoEmpresa;
             document.getElementById('direccionEmpresa').value = empresaProducto[0].empresas[i].direccionEmpresa;
@@ -231,7 +240,7 @@ const editarEmpresa = async (idCategoria, idEmpresa) => {
             document.getElementById('btn-actualizar').style.display = 'inline-block';
             document.getElementById('btn-actualizar').addEventListener('click', function () { actualizarEmpresa(`${empresaProducto[0]._id}`, `${empresaProducto[0].empresas[i].idEmpresa}`) });
             break;
-        }        
+        }
     }
     myModal.show();
 }
@@ -276,7 +285,7 @@ const guardarNuevaEmpresa = async () => {
             body: JSON.stringify(productosEmpresaNueva),
         });
     const resultado2 = await nuevaProductoEmpresa.json();
-console.log(resultado2);
+    console.log(resultado2);
 
     myModal.hide();
     obtenerEmpresasCategorias();
@@ -285,7 +294,7 @@ console.log(resultado2);
 
 const actualizarEmpresa = async (idCategoria, idEmpresa) => {
     console.log(idCategoria);
-    console.log(idEmpresa);    
+    console.log(idEmpresa);
     var imagen = '';
 
     let url = `https://backend-optientregas.vercel.app/empresasCategorias/${idCategoria}/empresas/`;
@@ -302,7 +311,7 @@ const actualizarEmpresa = async (idCategoria, idEmpresa) => {
     for (let i = 0; i < empresaA[0].empresas.length; i++) {
         if (empresaA[0].empresas[i].idEmpresa === idEmpresa) {
             imagen = empresaA[0].empresas[i].logoEmpresa;
-        break;
+            break;
         }
     }
 
@@ -317,12 +326,12 @@ const actualizarEmpresa = async (idCategoria, idEmpresa) => {
     const empresaEliminar = {
         idEmpresa: idEmpresa
     };
-    
+
     const eliminar = await fetch(url,
         {
             method: 'DELETE',
             headers: {
-                'Content-Type': 'application/json' 
+                'Content-Type': 'application/json'
             },
             body: JSON.stringify(empresaEliminar),
         }
@@ -332,7 +341,7 @@ const actualizarEmpresa = async (idCategoria, idEmpresa) => {
         {
             method: 'PUT',
             headers: {
-                'Content-Type': 'application/json' 
+                'Content-Type': 'application/json'
             },
             body: JSON.stringify(empresaActualizar),
         }
@@ -636,35 +645,39 @@ var modal = new bootstrap.Modal(document.getElementById('modalProductoEmpresa'),
 const generarProductosEmpresas = async () => {
     var index = document.getElementById('lista-categoria').value;
     var longitud = empresasCategorias[index].empresas.length;
-    
+
     console.log("Empresas de la categoria: ", index);
     document.getElementById('mostrarOpciones').innerHTML = '';
-    
-    for (let i = 0; i < longitud; i++) {
-        var idEmpresaCategoria = empresasCategorias[index].empresas[i].idEmpresa;        
-            const result = await fetch(`https://backend-optientregas.vercel.app/productos/${idEmpresaCategoria}`,
-                {
-                    method: 'GET',
-                    headers: {
-                        'Content-Type': 'application/json'
-                    },
-                }
-            );
-            const resultaProductos = await result.json();
-            document.getElementById('mostrarOpciones').innerHTML +=
-                `<div class="col-6">
+
+    for (let o = 0; o < empresasCategorias.length; o++) {
+        if (empresasCategorias[o].idCategoria == index) {
+            for (let i = 0; i < empresasCategorias[o].empresas.length; i++) {
+                var idEmpresaCategoria = empresasCategorias[o].empresas[i].idEmpresa;
+                const result = await fetch(`https://backend-optientregas.vercel.app/productos/${idEmpresaCategoria}`,
+                    {
+                        method: 'GET',
+                        headers: {
+                            'Content-Type': 'application/json'
+                        },
+                    }
+                );
+                const resultaProductos = await result.json();
+                document.getElementById('mostrarOpciones').innerHTML +=
+                    `<div class="col-6">
                     <div class="card" style="height: 15rem;">
-                        <img src="./${empresasCategorias[index].empresas[i].logoEmpresa}" class="card-img-top">
+                        <img src="./${empresasCategorias[o].empresas[i].logoEmpresa}" class="card-img-top">
                         <div class="card-body">
-                            <h6 class="">${empresasCategorias[index].empresas[i].nombreEmpresa}</h6>
+                            <h6 class="">${empresasCategorias[o].empresas[i].nombreEmpresa}</h6>
                             <p class="texto-empresa" onclick="mostrarProductos('${idEmpresaCategoria}');">${resultaProductos[0].productos.length} productos registrados.</p>
                         </div>
                     </div>
                 </div>`;
+            }
+        }
     }
 }
 
-const mostrarProductos = async (idEmpresa) => {    
+const mostrarProductos = async (idEmpresa) => {
     document.getElementById('modalContenido').innerHTML = '';
     for (let i = 0; i < empresasCategorias.length; i++) {
         for (let j = 0; j < empresasCategorias[i].empresas.length; j++) {
@@ -673,7 +686,7 @@ const mostrarProductos = async (idEmpresa) => {
                 break;
             }
             break;
-        }        
+        }
     }
 
     const result = await fetch(`https://backend-optientregas.vercel.app/productos/${idEmpresa}`,
@@ -740,7 +753,7 @@ const guardarProductoEmpresa = async (indice, idEmpresa) => {
         imagen: productosEmpresaSeleccionada[0].productos[indice].imagen,
         imagenLarge: productosEmpresaSeleccionada[0].productos[indice].imagenLarge,
         descripcion: text.value,
-        precio: parseInt(document.getElementById(`precioProducto${indice}`).value),        
+        precio: parseInt(document.getElementById(`precioProducto${indice}`).value),
         otros: []
     };
 
@@ -783,7 +796,7 @@ const guardarProductoEmpresa = async (indice, idEmpresa) => {
     productoActualizado = await resultado.json();
     console.log('Producto Modificada MongoDB', productoActualizado);
 
-    obtenerProductosEmpresas();    
+    obtenerProductosEmpresas();
     generarProductosEmpresas();
     modal.hide();
 }
@@ -802,7 +815,7 @@ const eliminarProductoEmpresa = async (idProductosEmpresa, idProducto) => {
             body: JSON.stringify(productoEliminar),
         }
     );
-    
+
     generarProductosEmpresas();
     modal.hide();
 }
