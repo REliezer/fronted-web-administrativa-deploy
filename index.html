@@ -1,0 +1,200 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="manifest" href="manifest.json" />
+    <title>opti-entregas | Web Administrativa</title>
+    <link rel="shortcut icon" href="./img/favicon.ico" type="image/x-icon">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-Zenh87qX5JnK2Jl0vWa8Ck2rdkQ2Bzep5IDxbcnCeuOxjzrPF/et3URy9Bv1WTRi" crossorigin="anonymous">
+    <script src="https://kit.fontawesome.com/444ab6c87d.js" crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="./css/estilos.css">
+    <link rel="stylesheet" href="./css/estilos-barra-navegacion.css">
+    <link rel="stylesheet" href="./admin-empresas/css/estilos-empresas.css">
+    <link rel="stylesheet" href="./admin-empresas/css/estilos-input-file.css">
+    <link rel="stylesheet" href="./admin-productos-empresas/css/estilos-admin-productos-empresas.css">
+    <link rel="stylesheet" href="./admin-ordenes-pendientes/css/estilos-admin-ordenes-pendientes.css">
+</head>
+
+<body style="overflow-y: hidden; overflow-x: hidden;">
+    <div class="container-fluid encabezado">
+        <div id="barraEncabezado" style="display: none;">
+            <div class="logo">
+                <img src="./img/Banner-sfb.png" alt="" width="150">
+            </div>
+            <div class="panel-derecho-superior">
+                <div class="titulo-admin" id="nombreAdmin">
+                    
+                </div>
+                <i class="fa-solid fa-user-tie fa-2x fa-border"></i>
+            </div>
+        </div>
+    </div>
+    <div class="container-fluid contenido" style="display: inline-block;" id="iniciarSesion">
+        <div class="logo-imagen">
+            <img src="./img/logo.png" alt="opti-entregas-logo" width="350" height="350">
+        </div>
+        <div>
+            <div class="container-fluid panel">
+                <div class="fondo-linea">
+                    <div class="titulo">
+                        Iniciar Sesión
+                    </div>
+                    <form>
+                        <div class="mb-3">
+                            <label class="form-label">Correo Electrónico</label>
+                            <input type="email" class="form-control" id="correoElectronico">
+                        </div>
+                        <div class="mb-3">
+                            <label class="form-label">Contraseña</label>
+                            <input type="password" class="form-control" id="contrasena">
+                        </div>
+                        <div class="mt-3 mb-5" style="border-style: none none solid; border-color:#F9B950; border-width: 3px;">
+                        </div>
+                        <div class="d-flex mb-2 mt-2" style="justify-content: center">
+                            <button type="button" class="btn btn-danger  btn-opti-red" onclick="iniciarSesion();">Iniciar Sesión</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="container-fluid contenido" style="display: none;" id="adminEmpresas">
+        <div class="menu-opciones fondo-linea">
+            <div class="">
+                <div class="titulo">Menú</div>
+                <div class="btn-opti" onclick="mostrarAdminEmpresas(this);">Administrar Empresa</div>
+                <div class="btn-opti" onclick="mostrarProductoEmpresas(this);">Administrar Productos de las Empresas</div>
+                <div class="btn-opti" onclick="mostrarMotoristas(this)">Motoristas Autorizados</div>
+                <div class="btn-opti" onclick="mostrarMotoristas(this)">Motoristas Pendientes</div>
+                <div class="btn-opti" onclick="mostrarOrdenesPendientes(this)">Ordenes Pendientes</div>
+            </div>
+        </div>
+        <div class="panel-derecho">
+            <div class="fondo-linea" id="panelEmpresa" style="display: none;">
+                <div class="titulo" id="tituloOpcion">
+                    Administrar Empresas
+                </div>
+                <div>
+                    <select class="form-select form-select-sm mb-3" id="lista-categoria" aria-label=".form-select-sm example"> </select>
+                </div>
+                <div class="row barra-navegacion" style="overflow-y: auto; max-height: 45vh;" id="mostrarOpciones">   
+
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="container-fluid pie-pagina">
+        <button type="button" class="btn btn-danger btn-opti-red" id="botonAccion" style="display: none;" onclick="agregarNuevaEmpresa();"></button>
+        <div class="vineta" style="float: right; padding-top: 10px;" id="horaActual"> </div>
+    </div>
+
+    <!-- Modal Nueva/Actualizar Empresa-->
+    <div class="modal fade" id="modalInformacionProducto" tabindex="-1" aria-labelledby="modalInformacionProductoLabel" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered modal-lg">
+            <div class="modal-content fondo-linea">
+                <div class="modal-header">
+                    <h1 class="modal-title titulo" id="modalInformacionProductoLabel"> </h1>
+                </div>
+                <div class="modal-body">
+                    <div class="row" id="modalCuerpoInformacion">
+                        <div class="col-6 shadow-sm p-3 bg-body rounded texto-general">
+                            <form>
+                                <div class="mb-3">
+                                    <label class="form-label vineta">Nombre de la Empresa</label>
+                                    <input type="text" class="form-control" id="nombreEmpresa">
+                                </div>
+                                <div class="mb-3">
+                                    <label class="form-label vineta">Categoria de la Empresa</label>
+                                    <select class="form-select form-select-sm mb-3" id="categoriaEmpresa" aria-label=".form-select-sm example"></select>
+                                </div>
+                                <div class="mb-3">
+                                    <label class="form-label vineta">Dirección de la Empresa</label>
+                                    <input type="text" class="form-control" id="direccionEmpresa">
+                                </div>
+                                <div class="mb-3">
+                                    <label class="form-label vineta">Teléfono</label>
+                                    <input type="text" class="form-control" id="telefonoEmpresa">
+                                </div>
+                            </form>
+                        </div>
+                        <div class="col-6 shadow-sm p-3 bg-body rounded texto-general">
+                            <div class="mb-3" id="imagenSelecionada">
+                                <label class="form-label vineta">Logo de la Empresa</label>
+                                <input type="file" class="form-control form-control-sm seleccionar-archivo" onchange="imagenPrevia(event);">
+                            </div>
+                            <div class="d-flex mb-2 mt-2" style="justify-content: center">
+                                <img src="" alt="" width="250" id="logoEmpresa">
+                            </div>
+                            <div class="d-flex mb-2 mt-2" style="justify-content: center">
+                                <button type="button" class="btn btn-danger btn-opti-red" id="liveToastBtn" onclick="guardarNuevaEmpresa();">Guardar</button>
+                                <button type="button" class="btn btn-danger btn-opti-red" id="btn-actualizar">Actualizar</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-danger boton-opti" style="display: none;" id="btnAsignar" data-bs-dismiss="modal" onclick="asignarOrden();">Asignar Orden</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal Productos Empresa-->
+    <div class="modal fade barra-navegacion" id="modalProductoEmpresa" tabindex="-1" aria-labelledby="modalTitulo" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered modal-xl">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h1 class="modal-title titulo" id="modalTitulo"> </h1>
+                </div>
+                <div class="modal-body">
+                    <div class="row" id="modalContenido">
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Modal Login Confirmacion-->
+    <div class="modal fade" id="modalLoginConfirmacion" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
+        aria-labelledby="modalLoginConfirmacionLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-body" id="modalMensajeLogin">
+    
+                </div>
+                <div class="modal-footer" id="modalPieLogin">
+    
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Toast-->
+    <div class="toast-container position-fixed bottom-0 end-0 p-3">
+        <div id="liveToast" class="toast" role="alert" aria-live="assertive" aria-atomic="true">
+            <div class="toast-header">
+                <img src="./img/favicon.ico" class="rounded me-2" alt="..." width="15">
+                <strong class="me-auto">opti-entregas</strong>
+                <small>hace unos segundos</small>
+                <button type="button" class="btn-close" data-bs-dismiss="toast" aria-label="Close"></button>
+            </div>
+            <div class="toast-body" id="toastBody">
+                Empresa agregada correctamente.
+            </div>
+        </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js" integrity="sha384-oBqDVmMz9ATKxIep9tiCxS/Z9fNfEXiDAYTujMAeBAsjFuCZSmKbSSUnQlmh/jp3" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/js/bootstrap.min.js" integrity="sha384-IDwe1+LCz02ROU9k972gdyvl+AESN10+x7tBKgc9I5HFtuNz0wWnPclzo6p9vxnk" crossorigin="anonymous"></script>
+    <script src="./assets/js/controlador.js"></script>
+    <script src="./admin-empresas/js/controlador-admin-empresas.js"></script>
+    <script src="./admin-ordenes-pendientes/js/controlador-admin-ordenes-pendientes.js"></script>
+    <script src="./admin-motoristas/js/controlador-admin-motoristas.js"></script>
+    <script src="./admin-productos-empresas/js/controlador-admin-productos-empresas.js"></script>
+    
+    <script src="./js/controlador.js"></script>
+</body>
+
+</html>

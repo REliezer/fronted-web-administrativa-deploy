@@ -1,0 +1,26 @@
+.seleccionar-archivo {
+    position: relative;
+    display: inline-block;
+}
+
+.seleccionar-archivo::before {
+    background-color: #195E95;
+    color: #F7EDE4;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 3px;
+    content: 'Seleccionar';
+    position: absolute;
+    left: 0;
+    right: 0;
+    top: 0;
+    bottom: 0;
+}
+
+.seleccionar-archivo input[type="file"] {
+    opacity: 0;
+    width: 200px;
+    height: 32px;
+    display: inline-block;
+}

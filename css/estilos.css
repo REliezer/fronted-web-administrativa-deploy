@@ -1,0 +1,177 @@
+@import url('https://fonts.googleapis.com/css2?family=EB+Garamond:ital,wght@0,400;0,500;0,700;0,800;1,400&family=Quicksand:wght@400;500;700&display=swap');
+
+.encabezado {
+    background: linear-gradient(90deg, #FFE6C1, #F7EDE4);
+    font-family: 'Quicksand', sans-serif;
+    color: #195E95;
+    height: 10vh;
+    font-size: 1.25rem;
+    position: relative;
+    top: 0;
+}
+
+.logo {
+    position: absolute;
+    left: 0;
+    top: 0;
+    display: flex;
+    align-items: flex-start;
+    align-content: flex-start;
+    justify-content: center;
+    padding: 0 15px;
+}
+
+.panel-derecho-superior {
+    position: absolute;
+    right: 0;
+    top: 0;
+    display: flex;
+    align-items: flex-start;
+    align-content: flex-start;
+    justify-content: center;
+    padding: 5px 15px;
+}
+
+.contenido {
+    background: linear-gradient(90deg, #195E95, #0D2F4B);
+    font-family: 'Quicksand', sans-serif;
+    color: #195E95;
+    font-size: 1.25rem;
+    height: 80vh;
+}
+
+.icono-opcion {
+    color: #A0333C;
+}
+
+.panel {
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    display: flex;
+    align-items: center;
+    align-content: center;
+    justify-content: flex-end;
+}
+
+.logo-imagen {
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    display: flex;
+    align-items: center;
+    align-content: center;
+    justify-content: flex-end;
+    left: 180px;
+}
+
+.titulo {
+    font-family: 'EB Garamond', serif;
+    color: #F7EDE4;
+    font-size: 3rem;
+    text-align: center;
+    text-shadow: 2px 2px 5px black;
+}
+
+.titulo-admin {
+    font-family: 'EB Garamond', serif;
+    color: #195E95;
+    font-size: 2rem;
+    text-align: center;
+    text-shadow: 2px 2px 5px black;
+    margin: 0 10px;
+}
+
+.fa-border {
+    border-radius: 100%;
+    border-color: #195E95;
+}
+
+.texto-general  {
+    font-family: 'Quicksand', sans-serif;
+    color: #195E95;
+    font-size: 0.8rem;
+    text-align: justify;
+    padding: 5px;
+}
+
+.boton {
+    background-color: #A0333C;
+    border-radius: 10px;
+    padding: 10px 20px;
+}
+
+.fondo-linea {
+    border-radius: 10px;
+    border-color: #FFE6C1;
+    border-style: dashed;
+    border-width: 1px;
+    padding: 15px 20px;
+    margin: 20px;
+    color: #F7EDE4;
+}
+
+.menu-opciones {
+    position: absolute;
+    left: 0;
+    top: auto;
+    display: flex;
+    align-items: center;
+    align-content: center;
+    justify-content: center;
+    padding: 10px;
+    width: 17em;
+    height: 70vh;
+}
+
+.panel-derecho {
+    position: absolute;
+    top: auto;
+    right: 0;
+    display: flex;
+    align-items: flex-start;
+    align-content: flex-start;
+    justify-content: flex-end;
+    padding: 0 15px;
+    max-width: 60%;
+    max-height: 70vh;
+}
+
+.btn-opti {
+    border-radius: 15px;
+    margin: 10px 5px;
+    padding: 10px;
+    width: 315px;
+    background: linear-gradient(90deg, #F7EDE4, #FFE6C1);
+    font-family: 'Quicksand', sans-serif;
+    color: #195E95;
+    font-size: 1rem;
+}
+
+.btn-opti:hover {
+    border-radius: 15px;
+    border: solid #A0333C 1px;
+    background: linear-gradient(90deg, #195E95, #0D2F4B);
+    color: #FFE6C1;
+    text-align: right;
+    cursor: pointer;
+}
+
+.pie-pagina {
+    background: linear-gradient(90deg, #F7EDE4, #FFE6C1);
+    position: absolute;
+    bottom: 0;
+    height: 10vh;
+    padding: 10px;
+    display: flex;
+    align-content: center;
+    justify-content: center;
+}
+
+.pie-pagina button {
+    font-family: 'Quicksand', sans-serif;
+    color: #F7EDE4;
+    font-size: 1rem;
+    text-align: justify;
+    padding: 10px;
+}

@@ -1,0 +1,48 @@
+@import url('https://fonts.googleapis.com/css2?family=EB+Garamond:ital,wght@0,400;0,500;0,700;0,800;1,400&family=Quicksand:wght@400;500;700&display=swap');
+
+.card {
+    background: linear-gradient(90deg, #FFE6C1, #F7EDE4);
+    border-radius: 10px;
+    padding: 10px;
+    margin: 5px;
+}
+
+.card-body {
+    padding: 5px;    
+}
+
+.card-body p {
+    margin-bottom: 0;
+}
+
+h6 {
+    font-family: 'Quicksand', sans-serif;
+    color: #195E95;
+    font-size: 1rem;
+    font-weight: bold;
+    text-align: justify;
+    margin-bottom: 0;
+}
+
+.modal-header {
+    background: linear-gradient(90deg, #195E95, #0D2F4B);
+}
+
+.modal-content {
+    background: linear-gradient(90deg, #FFE6C1, #F7EDE4);
+}
+
+.bg-body {
+    background-color: #F7EDE4!important;
+    
+}
+
+.modal-body {
+    border: solid 1px #195E95;
+    border-radius: 0 0 5px 5px;
+    
+}
+
+.icono-accion:hover {
+    cursor: pointer;
+}

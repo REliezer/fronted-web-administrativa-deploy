@@ -1,0 +1,41 @@
+{
+    "name": "opti-entregas | Web Administrativa",
+    "short_name": "opti-entregas",
+    "start_url": "index.html",
+    "display": "standalone",
+    "background_color": "#195E95",
+    "theme_color": "#A0333C",
+    "orientation": "portrait-primary",
+    "icons": [
+        {
+            "src": "/img/logo.png",
+            "type": "image/png",
+            "sizes": "72x72"
+        },
+        {
+            "src": "/img/logo.png",
+            "type": "image/png",
+            "sizes": "96x96"
+        },
+        {
+            "src": "/img/logo.png",
+            "type": "image/png",
+            "sizes": "128x128"
+        },
+        {
+            "src": "/img/logo.png",
+            "type": "image/png",
+            "sizes": "144x144"
+        },
+        {
+            "src": "/img/logo.png",
+            "type": "image/png",
+            "sizes": "152x152"
+        },
+        {
+            "src": "/img/logo.png",
+            "type": "image/png",
+            "sizes": "192x192"
+        }
+    ]
+}

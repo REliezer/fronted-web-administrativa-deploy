@@ -1,0 +1,12 @@
+
+.fondo {
+    background: linear-gradient(90deg, #FFE6C1, #F7EDE4);
+    color: #195E95;
+    font-size: 0.9rem;
+}
+
+.fondo-cabecera {
+    background: linear-gradient(90deg, #195E95, #0D2F4B);
+    color: #195E95;
+    font-size: 0.9rem;
+}
