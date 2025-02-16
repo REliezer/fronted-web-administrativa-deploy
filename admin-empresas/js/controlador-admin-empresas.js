@@ -31,6 +31,7 @@ function agregarNuevaEmpresa() {
 
 function mostrarAdminEmpresas(campo) {
     document.getElementById('lista-categoria-producto').style.display = 'none';
+    document.getElementById('lista-categoria').style.display = 'block';
 
     var titulo = campo.textContent;
 
