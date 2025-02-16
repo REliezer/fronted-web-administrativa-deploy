@@ -148,27 +148,51 @@ if (toastTrigger) {
 }
 
 const generarCategorias = async () => {
+    let listaCategoria = document.getElementById('lista-categoria');
+    let listaCategoriaProducto = document.getElementById('lista-categoria-producto');
+
+    let listaCAtegoriaAdminProducto = document.getElementById('categoriaEmpresa');
+
+    listaCategoria.innerHTML = ''; // 🔴 Limpia antes de agregar nuevas opciones
+    listaCAtegoriaAdminProducto.innerHTML = '';
+
     for (let i = 0; i < categorias.length; i++) {
-        document.getElementById('lista-categoria').innerHTML +=
+        //option para admin empresas
+        listaCategoria.innerHTML +=
             `<option value="${categorias[i].idCategoria}">${categorias[i].nombreCategoria}</option>`;
 
-        document.getElementById('categoriaEmpresa').innerHTML +=
+        //option para admin productos empresas
+        listaCategoriaProducto.innerHTML +=
+            `<option value="${categorias[i].idCategoria}">${categorias[i].nombreCategoria}</option>`;
+
+
+        listaCAtegoriaAdminProducto.innerHTML +=
             `<option value="${categorias[i].idCategoria}">${categorias[i].nombreCategoria}</option>`;
     }
+
+    // 🔴 Agregar evento para detectar cambios en la selección
+    listaCategoria.addEventListener('change', generarAdminEmpresas, true);
 }
 
 const generarAdminEmpresas = async () => {
+    console.log("Ejecutando generarAdminEmpresas...");
     indiceCategoriaSeleccionada = document.getElementById('lista-categoria').value;
     console.log("Cargar empresas de la categoria: ", indiceCategoriaSeleccionada);
 
     document.getElementById('mostrarOpciones').innerHTML = '';
-    console.log("empresasCategorias.length: ", empresasCategorias.length);
+
+    if (!empresasCategorias || empresasCategorias.length === 0) {
+        console.error("Error: No hay datos de empresasCategorias.");
+        return;
+    }
+
+    let contenidoHTML = '';
+
     for (let o = 0; o < empresasCategorias.length; o++) {
         if (empresasCategorias[o].idCategoria == indiceCategoriaSeleccionada) {
             console.log("empresasCategorias[o].idCategoria: ", empresasCategorias[o].idCategoria)
             for (let i = 0; i < empresasCategorias[o].empresas.length; i++) {
-                console.log("Cargar empresas de la categoria: ", empresasCategorias[o].empresas);
-                document.getElementById('mostrarOpciones').innerHTML +=
+                contenidoHTML +=
                     `<div class="col-6">
                     <div class="card" style="height: 15rem;">
                         <img src="./${empresasCategorias[o].empresas[i].logoEmpresa}" class="card-img-top">
@@ -187,6 +211,16 @@ const generarAdminEmpresas = async () => {
         }
 
     }
+    document.getElementById('mostrarOpciones').innerHTML = contenidoHTML;
+
+    // ✅ Agregar eventos después de cargar los datos
+    document.querySelectorAll('.empresa-card').forEach(card => {
+        card.addEventListener('click', function () {
+            let empresaId = this.getAttribute('data-id');
+            console.log("Empresa seleccionada:", empresaId);
+            editarEmpresa(empresaId); // Llama a la función correspondiente
+        });
+    });
 }
 
 const eliminarEmpresa = async (idCategoria, idEmpresa) => {
@@ -643,11 +677,21 @@ var modal = new bootstrap.Modal(document.getElementById('modalProductoEmpresa'),
 })
 
 const generarProductosEmpresas = async () => {
-    var index = document.getElementById('lista-categoria').value;
+    console.log("Ejecutando generarProductosEmpresas...");
+
+    var index = document.getElementById('lista-categoria-producto').value;
     var longitud = empresasCategorias[index].empresas.length;
+    let listaCategoria = document.getElementById('lista-categoria-producto');
 
     console.log("Empresas de la categoria: ", index);
     document.getElementById('mostrarOpciones').innerHTML = '';
+
+    if (!productosEmpresas || productosEmpresas.length === 0) {
+        console.error("Error: No hay datos de productosEmpresas.");
+        return;
+    }
+
+    let contenidoHTML = '';
 
     for (let o = 0; o < empresasCategorias.length; o++) {
         if (empresasCategorias[o].idCategoria == index) {
@@ -662,7 +706,8 @@ const generarProductosEmpresas = async () => {
                     }
                 );
                 const resultaProductos = await result.json();
-                document.getElementById('mostrarOpciones').innerHTML +=
+
+                contenidoHTML +=
                     `<div class="col-6">
                     <div class="card" style="height: 15rem;">
                         <img src="./${empresasCategorias[o].empresas[i].logoEmpresa}" class="card-img-top">
@@ -675,6 +720,11 @@ const generarProductosEmpresas = async () => {
             }
         }
     }
+
+    document.getElementById('mostrarOpciones').innerHTML = contenidoHTML;
+
+    listaCategoria.removeEventListener('change', generarAdminEmpresas, true);
+    listaCategoria.addEventListener('change', generarProductosEmpresas, true);
 }
 
 const mostrarProductos = async (idEmpresa) => {
@@ -825,7 +875,12 @@ obtenerCategorias().then(() => {
 });
 
 obtenerEmpresasCategorias().then(() => {
-    generarAdminEmpresas();
+    if (empresasCategorias.length > 0) {
+        generarAdminEmpresas();
+    } else {
+        console.error("No se pudieron cargar las empresas.");
+    }
+    //generarAdminEmpresas();
     //generarProductosEmpresas();
 });
 

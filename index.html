@@ -83,7 +83,9 @@
                 </div>
                 <div>
                     <select class="form-select form-select-sm mb-3" id="lista-categoria"
-                        aria-label=".form-select-sm example"> </select>
+                        aria-label=".form-select-sm example" onchange="generarAdminEmpresas()"> </select>
+                        <select class="form-select form-select-sm mb-3" style="display: none;" id="lista-categoria-producto"
+                        aria-label=".form-select-sm example" onchange="generarProductosEmpresas()"> </select>
                 </div>
                 <div class="row barra-navegacion" style="overflow-y: auto; max-height: 45vh;" id="mostrarOpciones">
 

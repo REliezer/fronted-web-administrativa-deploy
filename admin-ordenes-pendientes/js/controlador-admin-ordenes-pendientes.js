@@ -1,5 +1,9 @@
 function mostrarOrdenesPendientes(campo) {
     var titulo = campo.textContent;
+
+    // 🔴 Limpia el contenido anterior
+    document.getElementById('mostrarOpciones').innerHTML = '';
+    
     document.getElementById('panelEmpresa').style.display = 'inline-block';
     document.getElementById('tituloOpcion').innerHTML = titulo;
 

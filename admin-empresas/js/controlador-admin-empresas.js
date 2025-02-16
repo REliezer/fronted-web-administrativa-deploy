@@ -25,31 +25,48 @@ function agregarNuevaEmpresa() {
     document.getElementById('nombreEmpresa').focus();
 
     document.getElementById('modalInformacionProductoLabel').innerHTML = "Ingreso de una nueva empresa";
-    
+
     myModal.show();
 }
 
 function mostrarAdminEmpresas(campo) {
     var titulo = campo.textContent;
-    document.getElementById('panelEmpresa').style.display = 'inline-block';
-    document.getElementById('tituloOpcion').innerHTML = titulo;
 
+    var panel = document.getElementById('panelEmpresa');
+    if (!panel) {
+        console.error("Error: 'panelEmpresa' no encontrado en el DOM.");
+        return;
+    }
+
+    panel.style.display = 'inline-block';
+
+    document.getElementById('tituloOpcion').innerHTML = titulo;
     document.getElementById('botonAccion').style.display = 'inline-block';
     document.getElementById('botonAccion').innerHTML = "Agregar Nueva Empresa";
 
+    document.getElementById('mostrarOpciones').innerHTML = '';
+
+    let listaCategoria = document.getElementById('lista-categoria');
+
     //document.getElementById('lista-categoria').removeEventListener('change', generarProductosEmpresas, true);
-    document.getElementById('lista-categoria').addEventListener('change', generarAdminEmpresas, true);
-    generarAdminEmpresas();
+    // Esta linea
+    // document.getElementById('lista-categoria').addEventListener('change', generarAdminEmpresas, true);
+
+    obtenerCategorias().then(() => {
+        generarCategorias();
+        generarAdminEmpresas();
+    });
+
 }
 
 function imagenPrevia(event) {
     const input = event.target;
     var img = document.getElementById('logoEmpresa');
 
-	if(!input.files.length) return
-	
-	file = input.files[0];
+    if (!input.files.length) return
+
+    file = input.files[0];
     objectURL = URL.createObjectURL(file);
-	
-	img.src = objectURL;
+
+    img.src = objectURL;
 }
