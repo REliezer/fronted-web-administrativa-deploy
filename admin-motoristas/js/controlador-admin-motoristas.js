@@ -9,6 +9,7 @@ function mostrarMotoristas(campo) {
     //document.getElementById('botonAccion').innerHTML = "Agregar Nueva Empresa";
 
     document.getElementById('lista-categoria').style.display = 'none';
+    document.getElementById('lista-categoria-producto').style.display = 'none';
     
 
     if (titulo === "Motoristas Autorizados") {

@@ -30,6 +30,8 @@ function agregarNuevaEmpresa() {
 }
 
 function mostrarAdminEmpresas(campo) {
+    document.getElementById('lista-categoria-producto').style.display = 'none';
+
     var titulo = campo.textContent;
 
     var panel = document.getElementById('panelEmpresa');
